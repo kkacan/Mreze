@@ -1,0 +1,83 @@
+1. Jedina je razlika ta što na routeru nema potrebe za kreiranjem virtualnog suèelja (interface vlan X). Do sljedeæeg puta razmislite zašto!
+Paketi se odznaèavaju kad idu od switcha prema routeru.
+2. Probajte pingati raèunala iz razlièitih mreža (odjela) u Osijeku. Prolazi li ping? Ako prolazi zašto prolazi? Ako ne prolazi zašto ne prolazi? Probajte pingati s raèunala u Zagrebu raèunalo u Zadru ili bilo koje raèunalo u Osijeku. Prolazi li ping? 
+Ping izmeðu razlièitih mreža ne prolazi jer routeri znaju samo za mreže koje su spojene direktno na njihova suèelja. 
+3. Sjetite se koja su dva naèina na koji router može nauèiti o udaljenim mrežama. Koja je prednost/mana jednoga, a koja drugog? 
+Router može nauèiti o susjednim mrežama pomoæu statièkih i dinamièkih ruta (RIP i OSPF).
+Prednost statièkih ruta je da mi možemo odrediti kojim putem idu paketi, a nedostaci da je neotporna na promjene i kvarove.
+Prednost dinamièkih ruta je da je otporna na promjene i kvarove, a nedostaci da imaju manju metriku od statièkih ruta i ne možemo kontrolirati put paketa.
+4. Jesu li se pojavile rute u routing tablici? Koji prefiks imaju? Kolika im je metrika? Možete li sada pingati s raèunala u Zagrebu raèunalo u Zadru ili Osijeku?
+Ne prolazi ping jer se nezna vratiti. Imaju prefiks static.
+5. Prolazi li sada ping? Koliki je TTL? Èemu služi TTL?
+Prolazi. TTL je 125. TTL se umanjuje kod svakog hopa i kad doðe na 0 paket se odbacuje. Služi da nebi paketi beskonaèno kružili u mreži.
+6. Jesu li kreirane defaultne statièke rute? Koji prefiks imaju i razlikuje li se od prefiksa obiène statièke rute? 
+Jesu. Imaju prefiks: static default
+7. Razmislite što bi bilo kada bi na routerima ukljuèili OSPF ili RIP protokol. Kako bi u tom sluèaju usmjeravanje izgledalo. Kolika je metrika za RIP, a kolika za OSPF protokol? Kojem protokolu æe router više „vjerovati“ i zašto? 
+Rute bi bile dinamièke. Metrika RIP-a je 120 a OSPF-a 110. Router æe više vjerovati OSPF protokolu jer ima manju metriku.
+8. Koje su prednosti i nedostatci statièkog rutiranja? 
+Prednost statièkih ruta je da mi možemo odrediti kojim putem idu paketi, a nedostaci da je neotporna na promjene i kvarove.
+9. Koje su prednosti i nedostatci dinamièkog rutiranja?
+ Prednost dinamièkih ruta je da je otporna na promjene i kvarove, a nedostaci da imaju manju metriku od statièkih ruta i ne možemo kontrolirati put paketa.
+10. Koja 2 protokola poznajemo za dinamièko rutiranje? Koje su razlike meðu njima? Kojem protokolu router više „vjeruje“ i po èemu to znamo? 
+Metrika RIP-a je 120 a OSPF-a 110. Router æe više vjerovati OSPF protokolu jer ima manju metriku.
+11. Što je protokol ARP i èemu služi? ARP je protokol kojeg sloja? 
+Protokol mrežnog sloja koji služi za popunjavanje ARP tablice. 
+ARP tablica služi za spremanje parova IP i MAC adresa.
+
+12. Što je protokol ICMP i èemu služi? ICMP je protokol kojeg sloja? 
+Protokol mrežnog sloja i sastavni dio IP protokola. 
+Osnovna namjena ICMP protokola je osigurati kontrolu prijenosa podataka do odredišta. 
+
+13. Koje su to privatne IP adrese i èemu služe? Smije li se s njima „izlaziti“ na Internet? 
+10.0.0.0/8
+172.16.0.0/12
+192.168.0.0/16
+Slože za adresiranje ureðaja u lokalnim mrežama i snjima se ne smije izlaziti na internet.
+
+14. Što je routing tablica i èemu služi? 
+Routing tablica je tablica koja se nalazi u ureðajima (ureðaji minimalno treæeg sloja) i definira na koje suèelje treba proslijediti paket u odnosu na destinacijsku IP adresu u primljenom paketu.
+
+15. Što je to ARP tablica i èemu služi? Koliko ima stupaca i koji su? 
+ARP tablica služi za spremanje parova IP i MAC adresa. Po njoj ureðaj zna na koje suèelje poslati paket.
+
+16. Hoæe li router prosljeðivati ARP pakete na svoja preostala suèelja? 
+Ne. ARP paketi se šalju samo u domeni razašiljanja.
+
+17. Koja je destination MAC adresa u ARP REQUEST paketu? 
+FF.FF.FF.FF.FF.FF
+
+18. Koja je destiantion MAC adresa u ARP REPLY paketu? 
+MAC adresa ureðaja èija je IP adresa u request paketu.
+
+19. Što je to default gateway i èemu služi? Što ako raèunalo nema postavljen default gateway? 
+To je IP adresa suèelja za izlazak iz mreže. Raèunalo šalje na tu adresu sve pakete èija odredišna IP adresa ne pripada njegovoj mreži.
+
+20. Koliko je raspoloživih IP adresa u IP adresnoj mreži sa subnet maskom 255.255.252.0? 
+1022
+
+21. Što je to domena razašiljanja? Koji mrežni ureðaj prekida domenu razašiljanja? 
+Domena razašiljanja je lokalna mreža. Router prekida domenu razašiljanja.
+
+22. Što je to TTL? Što router radi s paketom kojeg primi a ima TTL=1? 
+TTL se umanjuje kod svakog hopa i kad doðe na 0 paket se odbacuje. Služi da ne bi paketi beskonaèno kružili u mreži.
+23. Što je to VLAN i èemu služi? 
+VLAN je logièko grupiranje korisnika u lokalnu mrežu i služi smanjenju domene razašiljanja.
+
+24. Zašto kažemo da je router ureðaj treæeg sloja? 
+Zato što radi na razini mrežnog sloja.
+
+25. Navedite slojeve TCP/IP protokola i jednom reèenicom objasnite ulogu svakog od njih. 
+Aplikacijski sloj - sloj nabliži korisniku, služi za prezentaciju podataka korisniku, enkriciju dekripciju i uspostavljanje i prekidanje sesija.
+Transportni sloj - adresiranje preko portova - brine se da podaci stignu do odreðene aplikacije.
+Mrežni sloj - brine se da podaci stignu do odreðenog ureðaja. (IP adrese)
+Sloj Pod pov. - služi za komunikaciju ureðaja u istoj mreži (MAC adrese)
+Fizièki sloj - prenosi podatke kroz fizièki medij
+
+26. Što je router?
+Router je ureðaj treæeg sloja koji povezuje dvije ili više razlièitih mreža ili razlièitih tehnologija.
+ 
+27. Koji standard sloja podatkovne poveznice smo dosad obraðivali? Kojem sloju on pruža uslugu? 
+Ethernet. On pruža uslugu mrežnom sloju.
+
+28. Što je ISP? 
+Internet service provider daje uslugu pristupa internetu.
